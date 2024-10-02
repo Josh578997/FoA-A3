@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import List, Tuple, TypeVar
 
 from data_structures.bst import BinarySearchTree
+from algorithms.mergesort import mergesort
 
 K = TypeVar('K')
 I = TypeVar('I')
@@ -48,7 +49,7 @@ class BetterBST(BinarySearchTree[K, I]):
             Best Case Complexity: TODO
             Worst Case Complexity: TODO
         """
-        raise NotImplementedError
+        return mergesort(elements,lambda x: x[0])
 
     def __build_balanced_tree(self, elements: List[Tuple[K, I]]) -> None:
         """
