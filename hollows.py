@@ -12,7 +12,7 @@ from typing import List
 
 from config import Tiles
 from treasure import Treasure, generate_treasures
-
+from betterbst import BetterBST
 
 class Hollow(ABC):
     """
@@ -83,7 +83,8 @@ class SpookyHollow(Hollow):
             Worst Case Complexity: O(n log n)
             Where n is the number of treasures in the hollow
         """
-        raise NotImplementedError
+        inputlst = [(x.value/x.weight,x.value/x.weight) for x in self.treasures]
+        return BetterBST(inputlst)
 
     def get_optimal_treasure(self, backpack_capacity: int) -> Treasure | None:
         """
