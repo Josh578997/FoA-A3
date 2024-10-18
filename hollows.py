@@ -121,7 +121,6 @@ class SpookyHollow(Hollow):
             returnedTreasure  = bestTreasure
             del self.treasures[bestTreasure.value/bestTreasure.weight]
             return returnedTreasure
-        del self.treasures[bestTreasure.value/bestTreasure.weight]
         try:
             return self.get_optimal_treasure().root
         except:
@@ -185,12 +184,14 @@ class MysticalHollow(Hollow):
             Worst Case Complexity: O(n log n)
             Where n is the number of treasures in the hollow
         """
-        bestTreasure = self.treasures.get_maximal(self.treasures.root).item
+        try:
+            bestTreasure = self.treasures.get_maximal(self.treasures.root).item
+        except:
+            return
         if bestTreasure.weight <= backpack_capacity:
             returnedTreasure  = bestTreasure
-            del bestTreasure
+            del self.treasures[bestTreasure.value/bestTreasure.weight]
             return returnedTreasure
-        del bestTreasure
         try:
             return self.get_optimal_treasure().root
         except:
