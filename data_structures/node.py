@@ -31,7 +31,6 @@ class TreeNode(Generic[K, I]):
         self.left = None
         self.right = None
         self.depth = depth
-        print(self.key)
 
     def __str__(self):
         """
