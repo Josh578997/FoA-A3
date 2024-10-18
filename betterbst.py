@@ -78,6 +78,6 @@ class BetterBST(BinarySearchTree[K, I]):
         """
         if len(elements) is not 0:
             mid = len(elements)//2
-            self[elements[mid][0]]= elements[mid][0]
+            self[elements[mid][0]]= elements[mid][1]
             self.__build_balanced_tree(elements[:mid])
             self.__build_balanced_tree(elements[mid+1:])
