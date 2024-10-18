@@ -71,7 +71,7 @@ class Maze:
         self.rows: int = rows
         self.cols: int = cols
         self.grid: List[List[MazeCell]] = self._create_grid(walls, hollows, end_positions)
-        self.valid_positions = [' ','E']
+        self.valid_position_tiles = [' ','E']
 
     def _create_grid(self, walls: List[Position], hollows: List[(Hollow, Position)], end_positions: List[Position]) -> List[List[MazeCell]]:
         """
@@ -201,7 +201,7 @@ class Maze:
             Best Case Complexity: TODO
             Worst Case Complexity: TODO
         """
-        if position in self.valid_positions:
+        if position.tile in self.valid_position_tiles:
             return True
         return False
 
