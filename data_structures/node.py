@@ -25,6 +25,7 @@ class TreeNode(Generic[K, I]):
             
             :complexity: O(1)
         """
+        print(self.key)
         self.key = key
         self.item = item
         self.left = None
