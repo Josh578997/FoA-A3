@@ -201,6 +201,8 @@ class Maze:
             Best Case Complexity: TODO
             Worst Case Complexity: TODO
         """
+
+        # this is not what it should be doing
         if position.tile in self.valid_position_tiles:
             return True
         return False
