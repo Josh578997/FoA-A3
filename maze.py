@@ -71,6 +71,7 @@ class Maze:
         self.rows: int = rows
         self.cols: int = cols
         self.grid: List[List[MazeCell]] = self._create_grid(walls, hollows, end_positions)
+        self.valid_positions = [' ','E']
 
     def _create_grid(self, walls: List[Position], hollows: List[(Hollow, Position)], end_positions: List[Position]) -> List[List[MazeCell]]:
         """
@@ -200,7 +201,9 @@ class Maze:
             Best Case Complexity: TODO
             Worst Case Complexity: TODO
         """
-        raise NotImplementedError
+        if position in self.valid_positions:
+            return True
+        return False
 
     def get_available_positions(self, current_position: Position) -> List[Position]:
         """
@@ -216,8 +219,12 @@ class Maze:
             Best Case Complexity: TODO
             Worst Case Complexity: TODO
         """
-
-        raise NotImplementedError
+        available_positions = []
+        for row in self.grid:
+            for position in row:
+                if self.is_valid_position(position):
+                    available_positions.append(position)
+        return available_positions
 
     def find_way_out(self) -> List[Position] | None:
         """
