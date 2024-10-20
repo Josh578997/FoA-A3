@@ -113,6 +113,7 @@ class TestTask3(TestCase):
     def test_exit_finding_basic(self) -> None:
         maze: Maze = Maze.load_maze_from_file("/sample2.txt")
         student_result: List[Position] | None = maze.find_way_out()
+        print(student_result)
         self.validate_path(maze, student_result)
 
     @number("3.2")
