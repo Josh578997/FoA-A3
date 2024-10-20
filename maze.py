@@ -245,7 +245,7 @@ class Maze:
             Worst Case Complexity: TODO
         """
         start: Position = self.start_position
-        raise NotImplementedError
+        return
 
     def take_treasures(self, path: List[MazeCell], backpack_capacity: int) -> List[Treasure]:
         """
