@@ -293,14 +293,13 @@ class Maze:
                 continue
             if maze_cell.tile == Tiles.EXIT.value:
                 path_out.append(pos)
-                return pos
+                return path_out
             maze_cell.visited = True
             path_out.append(pos)
             res =  self.find_way_out_aux(pos,path_out)
             if res:
                 return res
-            path_out.pop()
-            
+            path_out.pop() 
         return
             
 
