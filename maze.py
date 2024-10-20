@@ -6,7 +6,7 @@ from typing import List, Tuple
 from config import Directions, Tiles
 from hollows import Hollow, MysticalHollow, SpookyHollow
 from treasure import Treasure
-
+from data_structures.linked_stack import LinkedStack
 
 class Position:
     def __init__(self, row: int, col: int) -> None:
@@ -71,7 +71,6 @@ class Maze:
         self.rows: int = rows
         self.cols: int = cols
         self.grid: List[List[MazeCell]] = self._create_grid(walls, hollows, end_positions)
-        self.valid_position_tiles = [' ','E']
 
     def _create_grid(self, walls: List[Position], hollows: List[(Hollow, Position)], end_positions: List[Position]) -> List[List[MazeCell]]:
         """
@@ -201,11 +200,9 @@ class Maze:
             Best Case Complexity: TODO
             Worst Case Complexity: TODO
         """
-
-        # this is not what it should be doing
-        if position.tile in self.valid_position_tiles:
-            return True
-        return False
+        if self.grid[position.row][position.col].tile == Tiles.WALL.value:
+            return False
+        return True
 
     def get_available_positions(self, current_position: Position) -> List[Position]:
         """
@@ -221,12 +218,45 @@ class Maze:
             Best Case Complexity: TODO
             Worst Case Complexity: TODO
         """
-        available_positions = []
-        for row in self.grid:
-            for position in row:
-                if self.is_valid_position(position):
-                    available_positions.append(position)
+        available_positions = list()
+        current_position_tup = (current_position.row,current_position.col)
+        if current_position.row ==0 and current_position.col ==0:
+            x_movement = list(self.add_tuples(current_position_tup,self.directions[Directions.RIGHT]))
+            y_movement = list(self.add_tuples(current_position_tup,self.directions[Directions.DOWN]))
+        elif current_position.row == self.rows and current_position.col == self.cols:
+            x_movement = list(self.add_tuples(current_position_tup,self.directions[Directions.LEFT]))
+            y_movement = list(self.add_tuples(current_position_tup,self.directions[Directions.UP]))
+        elif current_position.row == 0 and current_position.col == self.cols:
+            x_movement = list(self.add_tuples(current_position_tup,self.directions[Directions.LEFT]))
+            y_movement = list(self.add_tuples(current_position_tup,self.directions[Directions.DOWN]))
+        elif current_position.row == self.rows and current_position.col == 0:
+            x_movement = list(self.add_tuples(current_position_tup,self.directions[Directions.RIGHT]))
+            y_movement = list(self.add_tuples(current_position_tup,self.directions[Directions.UP]))
+        elif current_position.row == 0:
+            x_movement = list((self.add_tuples(current_position_tup,self.directions[Directions.LEFT])),(self.add_tuples(current_position_tup,self.directions[Directions.RIGHT])))
+            y_movement = list(self.add_tuples(current_position_tup,self.directions[Directions.DOWN]))
+        elif current_position.row == self.rows:
+            x_movement = list((self.add_tuples(current_position_tup,self.directions[Directions.LEFT]),self.add_tuples(current_position_tup,self.directions[Directions.RIGHT])))
+            y_movement = list(self.add_tuples(current_position_tup,self.directions[Directions.UP]))
+        elif current_position.col == 0:
+            x_movement = list(self.add_tuples(current_position_tup,self.directions[Directions.RIGHT]))
+            y_movement = list((self.add_tuples(current_position_tup,self.directions[Directions.UP]),self.add_tuples(current_position_tup,self.directions[Directions.DOWN])))
+        elif current_position.col == self.cols:
+            x_movement = list(self.add_tuples(current_position_tup,self.directions[Directions.LEFT]))
+            y_movement = list((self.add_tuples(current_position_tup,self.directions[Directions.UP]),self.add_tuples(current_position_tup,self.directions[Directions.DOWN])))
+        else:
+            x_movement = list((self.add_tuples(current_position_tup,self.directions[Directions.LEFT]),self.add_tuples(current_position_tup,self.directions[Directions.RIGHT])))
+            y_movement = list((self.add_tuples(current_position_tup,self.directions[Directions.UP]),self.add_tuples(current_position_tup,self.directions[Directions.DOWN])))
+        for movement in x_movement + y_movement:
+            pos_movement = Position(movement[0],movement[1])
+            if self.is_valid_position(pos_movement):
+                available_positions.append(pos_movement)
         return available_positions
+    
+    def add_tuples(tuple1,tuple2) -> Tuple:
+        return tuple(map(lambda i,j: i+j,tuple1,tuple2))
+        
+    
 
     def find_way_out(self) -> List[Position] | None:
         """
@@ -244,8 +274,29 @@ class Maze:
             Best Case Complexity: TODO
             Worst Case Complexity: TODO
         """
+        
         start: Position = self.start_position
-        return
+        path_out  = list() # visited list
+        self.grid[start.row][start.col].visited = True
+        path_out.append(start)
+        
+
+        
+    def find_way_out_aux(self,position,path_out) -> List[Position] | None:
+        """
+        Auxillary for find_way_out()
+        """
+        adjacents = self.get_available_positions(position)
+        for pos in adjacents:
+            maze_cell = self.grid[pos.row][pos.col]
+            maze_cell.visited = True
+            path_out.append(pos)
+            if maze_cell.visited == False:
+                if maze_cell.tile == Tiles.EXIT.value:
+                    return pos
+                return self.find_way_out_aux(pos,path_out)
+            return
+            
 
     def take_treasures(self, path: List[MazeCell], backpack_capacity: int) -> List[Treasure]:
         """
