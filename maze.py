@@ -337,12 +337,14 @@ class Maze:
         for cell in path:
             if cell.tile == Tiles.SPOOKY_HOLLOW:
                 tres = SpookyHollow.get_optimal_treasure(backpack_capacity)
-                taken_treasures.append(tres)
-                backpack_capacity -= tres.weight
+                if tres:
+                    backpack_capacity -= tres.weight
+                    taken_treasures.append(tres)
             if cell.tile == Tiles.MYSTICAL_HOLLOW:
                 tres = MysticalHollow.get_optimal_treasure(backpack_capacity)
-                taken_treasures.append(tres)
-                backpack_capacity -= tres.weight
+                if tres:
+                    backpack_capacity -= tres.weight
+                    taken_treasures.append(tres)
         if len(taken_treasures) == 0:
              return
         return taken_treasures
