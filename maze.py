@@ -253,7 +253,7 @@ class Maze:
                 available_positions.append(pos_movement)
         return available_positions
     
-    def add_tuples(tuple1,tuple2) -> Tuple:
+    def add_tuples(self,tuple1,tuple2) -> Tuple:
         return tuple(map(lambda i,j: i+j,tuple1,tuple2))
         
     
