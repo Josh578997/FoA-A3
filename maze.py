@@ -343,10 +343,9 @@ class Maze:
                 tres = MysticalHollow.get_optimal_treasure(backpack_capacity)
                 taken_treasures.append(tres)
                 backpack_capacity -= tres.weight
-            
-        if len(taken_treasures) != 0:
-            return taken_treasures
-        return
+        if len(taken_treasures) == 0:
+             return
+        return taken_treasures
 
 
     def __repr__(self) -> str:
