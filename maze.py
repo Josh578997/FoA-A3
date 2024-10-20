@@ -285,6 +285,13 @@ class Maze:
     def find_way_out_aux(self,position,path_out) -> List[Position] | None:
         """
         Auxillary for find_way_out()
+        args: 
+            position: a position object.
+            path_out: path to reach maze exit.
+
+        Complexity:
+            Best Case Complexity: TODO
+            Worst Case Complexity: TODO
         """
         adjacents = self.get_available_positions(position)
         for pos in adjacents:
@@ -326,7 +333,21 @@ class Maze:
             Worst Case Complexity: TODO
 
         """
-        raise NotImplementedError
+        taken_treasures = list()
+        for cell in path:
+            if cell.tile == Tiles.SPOOKY_HOLLOW:
+                tres = SpookyHollow.get_optimal_treasure(backpack_capacity)
+                taken_treasures.append(tres)
+                backpack_capacity -= tres.weight
+            if cell.tile == Tiles.MYSTICAL_HOLLOW:
+                tres = MysticalHollow.get_optimal_treasure(backpack_capacity)
+                taken_treasures.append(tres)
+                backpack_capacity -= tres.weight
+            
+        if len(taken_treasures) != 0:
+            return taken_treasures
+        return
+
 
     def __repr__(self) -> str:
         return str(self)
