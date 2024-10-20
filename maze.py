@@ -289,11 +289,18 @@ class Maze:
         adjacents = self.get_available_positions(position)
         for pos in adjacents:
             maze_cell = self.grid[pos.row][pos.col]
+            if maze_cell.visited:
+                continue
             if maze_cell.tile == Tiles.EXIT.value:
+                path_out.append(pos)
                 return pos
             maze_cell.visited = True
             path_out.append(pos)
-            return self.find_way_out_aux(pos,path_out)
+            res =  self.find_way_out_aux(pos,path_out)
+            if res:
+                return res
+            path_out.pop()
+            
         return
             
 
