@@ -279,9 +279,7 @@ class Maze:
         path_out  = list() # visited list
         self.grid[start.row][start.col].visited = True
         path_out.append(start)
-        res =self.find_way_out_aux(start,path_out)
-        print(res)
-        return res
+        return self.find_way_out_aux(start,path_out)
 
         
     def find_way_out_aux(self,position,path_out) -> List[Position] | None:
