@@ -295,7 +295,7 @@ class Maze:
                 return self.find_way_out_aux(pos,path_out)
             maze_cell.visited = True
             path_out.append(pos)
-            return
+        return
             
 
     def take_treasures(self, path: List[MazeCell], backpack_capacity: int) -> List[Treasure]:
