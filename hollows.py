@@ -122,7 +122,7 @@ class SpookyHollow(Hollow):
             del self.treasures[bestTreasure.value/bestTreasure.weight]
             return returnedTreasure
         try:
-            return self.get_optimal_treasure().root
+            return self.get_optimal_treasure(backpack_capacity).root
         except:
             return
 
@@ -194,7 +194,7 @@ class MysticalHollow(Hollow):
             del self.treasures[bestTreasure.value/bestTreasure.weight]
             return returnedTreasure
         try:
-            return self.get_optimal_treasure().root
+            return self.get_optimal_treasure(backpack_capacity).root
         except:
             return
 
