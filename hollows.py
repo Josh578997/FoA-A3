@@ -121,7 +121,7 @@ class SpookyHollow(Hollow):
             returnedTreasure  = bestTreasure
             del self.treasures[bestTreasure.value/bestTreasure.weight]
             return returnedTreasure
-        return self.get_optimal_treasure(backpack_capacity).root
+        return self.get_optimal_treasure(backpack_capacity)
 
     def __str__(self) -> str:
         return Tiles.SPOOKY_HOLLOW.value
@@ -189,7 +189,7 @@ class MysticalHollow(Hollow):
             returnedTreasure  = bestTreasure
             del self.treasures[bestTreasure.value/bestTreasure.weight]
             return returnedTreasure
-        return self.get_optimal_treasure(backpack_capacity).root
+        return self.get_optimal_treasure(backpack_capacity)
 
     def __str__(self) -> str:
         return Tiles.MYSTICAL_HOLLOW.value
