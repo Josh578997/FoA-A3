@@ -181,7 +181,6 @@ class MysticalHollow(Hollow):
             Worst Case Complexity: O(n log n)
             Where n is the number of treasures in the hollow
         """
-        print(self.treasures)
         try:
             bestTreasure = self.treasures.get_maximal(self.treasures.root).item
         except:
