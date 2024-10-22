@@ -181,13 +181,13 @@ class MysticalHollow(Hollow):
             Worst Case Complexity: O(n log n)
             Where n is the number of treasures in the hollow
         """
-        try:
-            bestTreasure = self.treasures.get_maximal(self.treasures.root).item
-        except:
+        bestTreasure = self.treasures.get_maximal(self.treasures.root)
+        if bestTreasure.item is None:
             return
-        if bestTreasure.weight <= backpack_capacity:
-            returnedTreasure  = bestTreasure
-            del self.treasures[bestTreasure.value/bestTreasure.weight]
+        
+        if bestTreasure.item.weight <= backpack_capacity:
+            returnedTreasure  = bestTreasure.item
+            del self.treasures[bestTreasure.item.value/bestTreasure.item.weight]
             return returnedTreasure
         return self.get_optimal_treasure(backpack_capacity)
 
