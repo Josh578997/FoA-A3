@@ -335,18 +335,15 @@ class Maze:
         """
         taken_treasures = list()
         for cell in path:
-            print("\n")
             if str(cell.tile) == Tiles.SPOOKY_HOLLOW.value:
                 tres = cell.tile.get_optimal_treasure(backpack_capacity)
                 if tres is not None:
                     backpack_capacity -= tres.weight
-                    print(backpack_capacity)
                     taken_treasures.append(tres)
             if str(cell.tile) == Tiles.MYSTICAL_HOLLOW.value:
                 tres = cell.tile.get_optimal_treasure(backpack_capacity)
                 if tres is not None:
                     backpack_capacity -= tres.weight
-                    print(backpack_capacity)
                     taken_treasures.append(tres)
         if len(taken_treasures) == 0:
              return
