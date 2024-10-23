@@ -151,7 +151,7 @@ class MysticalHollow(Hollow):
             Worst Case Complexity: O(n)
             Where n is the number of treasures in the hollow
         """
-        inputlst = [(x.weight/x.value,x) for x in self.treasures]
+        inputlst = [(x.value/x.weight,x) for x in self.treasures]
         self.treasures = BetterBST(inputlst)
 
     def get_optimal_treasure(self, backpack_capacity: int) -> Treasure | None:
@@ -192,6 +192,5 @@ class MysticalHollow(Hollow):
 
     def __repr__(self) -> str:
         return str(self)
-    def __truediv__(self,other):
-        if other == 0:
-            return 0
+    
+    
