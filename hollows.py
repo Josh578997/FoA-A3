@@ -183,6 +183,7 @@ class MysticalHollow(Hollow):
         """
         try:
             bestTreasure = self.treasures.get_maximal(self.treasures.root).item
+            print(bestTreasure)
         except:
             return
         if bestTreasure.weight <= backpack_capacity:
