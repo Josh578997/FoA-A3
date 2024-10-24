@@ -5,7 +5,6 @@ from treasure import Treasure
 from data_structures.bst import BinarySearchTree
 from data_structures.node import TreeNode
 from algorithms.mergesort import mergesort
-from data_structures.linked_stack import LinkedStack
 
 K = TypeVar('K')
 I = TypeVar('I')
@@ -34,8 +33,7 @@ class BetterBST(BinarySearchTree[K, I]):
         super().__init__()
         new_elements: List[Tuple[K, I]] = self.__sort_elements(elements)
         self.__build_balanced_tree(new_elements)
-    def __iter__(self):
-        return ReverseBSTInOrderIterator(self.root)
+
     def __sort_elements(self, elements: List[Tuple[K, I]]) -> List[Tuple[K, I]]:
         """
         Recall one of the drawbacks to using a binary search tree is that it can become unbalanced.
@@ -83,37 +81,3 @@ class BetterBST(BinarySearchTree[K, I]):
             self[elements[mid][0]]= elements[mid][1]
             self.__build_balanced_tree(elements[:mid])
             self.__build_balanced_tree(elements[mid+1:])
-    
-
-class ReverseBSTInOrderIterator:
-    """ Reverse In-order iterator for the binary search tree.
-        Performs stack-based BST traversal. (right,root,left)
-    """
-
-    def __init__(self, root: TreeNode[K, I]) -> None:
-        """ Iterator initialiser. """
-
-        self.stack = LinkedStack()
-        self.current = root
-
-    def __iter__(self):
-        """ Standard __iter__() method for initialisers. Returns itself. """
-
-        return self
-
-    def __next__(self) -> TreeNode[K, I]:
-        """ The main body of the iterator.
-            Returns keys of the BST one by one respecting the in-order.
-        """
-
-        while self.current:
-            self.stack.push(self.current)
-            self.current = self.current.right
-
-        if self.stack.is_empty():
-            raise StopIteration
-
-        result = self.stack.pop()
-        self.current = result.left
-
-        return result
