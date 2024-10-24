@@ -114,13 +114,15 @@ class SpookyHollow(Hollow):
             n is the number of treasures in the hollow 
         """
         try:
-            bestTreasure = self.treasures.get_maximal(self.treasures.root).item
+            bestTreasureNode = self.treasures.get_maximal(self.treasures.root)
+            bestTreasure = bestTreasureNode.item
         except:
             return
         if bestTreasure.weight <= backpack_capacity:
             returnedTreasure  = bestTreasure
             del self.treasures[bestTreasure.value/bestTreasure.weight]
             return returnedTreasure
+        del self.treasures[bestTreasureNode.key]
         return self.get_optimal_treasure(backpack_capacity)
 
     def __str__(self) -> str:
