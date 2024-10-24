@@ -177,16 +177,19 @@ class MysticalHollow(Hollow):
             Where n is the number of treasures in the hollow
         """
         if len(self.treasures) == 0:
-            return None
-        
-        while len(self.treasures) >0:
-            check_tres = self.treasures.get_max()
-            if check_tres[1].weight <= backpack_capacity:
-                return check_tres[1]
-            else:
-                self.treasures.add(check_tres)
-        return
-
+            return 
+        cache = LinkedStack()
+        return self.get_optimal_treasure_aux(backpack_capacity,cache)
+    def get_optimal_treasure_aux(self, backpack_capacity: int,cache:LinkedStack) -> Treasure | None:
+        if len(self.treasures) ==0:
+            return
+        check_tres = self.treasures.get_max()
+        if check_tres[1].weight<= backpack_capacity:
+            while not cache.is_empty():
+                self.treasures.add(cache.pop())
+            return check_tres[1]
+        cache.push(check_tres)
+        return self.get_optimal_treasure_aux(backpack_capacity,cache)
     def __str__(self) -> str:
         return Tiles.MYSTICAL_HOLLOW.value
 
