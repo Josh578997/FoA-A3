@@ -197,8 +197,8 @@ class Maze:
             bool - True if the position is within the maze and not blocked by a wall / hollow.
 
         Complexity:
-            Best Case Complexity: TODO
-            Worst Case Complexity: TODO
+            Best Case Complexity: O(1)
+            Worst Case Complexity: O(1)
         """
         if self.grid[position.row][position.col].tile == Tiles.WALL.value:
             return False
@@ -215,8 +215,8 @@ class Maze:
             List[Position] - A list of all the new possible you can move to from your current position.
 
         Complexity:
-            Best Case Complexity: TODO
-            Worst Case Complexity: TODO
+            Best Case Complexity: O(1)
+            Worst Case Complexity: O(1)
         """
         available_positions = list()
         current_position_tup = (current_position.row,current_position.col)
@@ -254,6 +254,12 @@ class Maze:
         return available_positions
     
     def add_tuples(self,tuple1,tuple2) -> Tuple:
+        """
+        adds 2 tuples together
+        Best Case Complexity: O(n)
+        Worst Case Complexity: O(n)
+        n is the number of elements in the tuples
+        """
         return tuple(map(lambda i,j: i+j,tuple1,tuple2))
         
     
@@ -271,8 +277,9 @@ class Maze:
             None: Unable to find a path to the exit, simply return None.
 
         Complexity:
-            Best Case Complexity: TODO
-            Worst Case Complexity: TODO
+            Best Case Complexity: O(1)
+            Worst Case Complexity: O(n)
+            n is the number of cells in the maze
         """
         
         start: Position = self.start_position
@@ -290,8 +297,9 @@ class Maze:
             path_out: path to reach maze exit.
 
         Complexity:
-            Best Case Complexity: TODO
-            Worst Case Complexity: TODO
+            Best Case Complexity: O(1)
+            Worst Case Complexity: O(n)
+            n is the number of cells in the maze
         """
         adjacents = self.get_available_positions(position)
         for pos in adjacents:
@@ -329,8 +337,10 @@ class Maze:
             List[Treasure] - List of the most optimal treasures.
 
         Complexity:
-            Best Case Complexity: TODO
-            Worst Case Complexity: TODO
+            Best Case Complexity: O(n)
+            Worst Case Complexity: O(n*m)
+            n is the number of cells in the path
+            m is the number of treasures in each hollow
 
         """
         taken_treasures = list()

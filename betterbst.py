@@ -28,8 +28,8 @@ class BetterBST(BinarySearchTree[K, I]):
             elements(List[tuple[K, I]]): The elements to be inserted into the tree.
 
         Complexity:
-            Best Case Complexity: TODO
-            Worst Case Complexity: TODO
+            Best Case Complexity: nlog(n)
+            Worst Case Complexity: nlog(n)
         """
         super().__init__()
         new_elements: List[Tuple[K, I]] = self.__sort_elements(elements)
@@ -49,8 +49,9 @@ class BetterBST(BinarySearchTree[K, I]):
             list(Tuple[K, I]]) - elements after being sorted.
 
         Complexity:
-            Best Case Complexity: TODO
-            Worst Case Complexity: TODO
+            Best Case Complexity: nlog(n)
+            Worst Case Complexity: nlog(n)
+            n is the amount of elements in the betterbst
         """
         return mergesort(elements,lambda x: x[0])
     

@@ -103,13 +103,9 @@ class SpookyHollow(Hollow):
         Complexity:
             (This is the actual complexity of your code, 
             remember to define all variables used.)
-            Best Case Complexity: TODO
-            Worst Case Complexity: TODO
-
-        Complexity requirements for full marks:
             Best Case Complexity: O(log(n))
             Worst Case Complexity: O(n)
-            n is the number of treasures in the hollow 
+            n is the number of treasures in the hollow
         """
         for bestTreasure in self.treasures:
             bestTreasureItem = bestTreasure.item
@@ -137,13 +133,9 @@ class MysticalHollow(Hollow):
         Complexity:
             (This is the actual complexity of your code, 
             remember to define all variables used.)
-            Best Case Complexity: TODO
-            Worst Case Complexity: TODO
-
-        Complexity requirements for full marks:
             Best Case Complexity: O(n)
             Worst Case Complexity: O(n)
-            Where n is the number of treasures in the hollow
+            n is the number of treasures in the hollow
         """
         inputlst = [(x.value/x.weight,x) for x in self.treasures]
         heap = MaxHeap(100)
@@ -168,20 +160,21 @@ class MysticalHollow(Hollow):
         Complexity:
             (This is the actual complexity of your code, 
             remember to define all variables used.)
-            Best Case Complexity: TODO
-            Worst Case Complexity: TODO
-
-        Complexity requirements for full marks:
-            Best Case Complexity: O(log n)
-            Worst Case Complexity: O(n log n)
-            Where n is the number of treasures in the hollow
+            Best Case Complexity: O(log(n))
+            Worst Case Complexity: O(nlog(n))
+            n is the number of treasures (size of self.treasures heap)
         """
+
         if len(self.treasures) == 0:
             return 
         cache = LinkedStack()
         return self.get_optimal_treasure_aux(backpack_capacity,cache)
+    
     def get_optimal_treasure_aux(self, backpack_capacity: int,cache:LinkedStack) -> Treasure | None:
+        "auxillary for get_optimal_treasure()"
         if len(self.treasures) ==0:
+            while not cache.is_empty():
+                self.treasures.add(cache.pop())
             return
         check_tres = self.treasures.get_max()
         if check_tres[1].weight<= backpack_capacity:
