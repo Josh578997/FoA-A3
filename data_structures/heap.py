@@ -4,7 +4,7 @@ from __future__ import annotations
 __author__ = "Brendon Taylor, modified by Jackson Goerner"
 __docformat__ = 'reStructuredText'
 
-from typing import Generic
+from typing import Generic, List
 
 from data_structures.referential_array import ArrayR, T
 

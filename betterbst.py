@@ -67,16 +67,14 @@ class BetterBST(BinarySearchTree[K, I]):
         Complexity:
             (This is the actual complexity of your code, 
             remember to define all variables used.)
-            Best Case Complexity: TODO
-            Worst Case Complexity: TODO
+            Best Case Complexity: O(n*log(n))
+            Worst Case Complexity: O(n*log(n))
+            n is the number of elements in the list
 
         Justification:
-            TODO
+            Builds a balanced tree through recursion, the function will be called n amount of times 
+            and takes log(n) time to insert into the tree, yeilding an overall complexity of O(n*log(n))
 
-        Complexity requirements for full marks:
-            Best Case Complexity: O(n * log(n))
-            Worst Case Complexity: O(n * log(n))
-            where n is the number of elements in the list.
         """
         if len(elements) is not 0:
             mid = len(elements)//2

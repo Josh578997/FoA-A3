@@ -13,7 +13,8 @@ from typing import List
 from config import Tiles
 from treasure import Treasure, generate_treasures
 from betterbst import BetterBST
-
+from data_structures.heap import MaxHeap
+from data_structures.linked_stack import LinkedStack
 class Hollow(ABC):
     """
     DO NOT MODIFY THIS CLASS
@@ -75,13 +76,10 @@ class SpookyHollow(Hollow):
         Complexity:
             (This is the actual complexity of your code, 
             remember to define all variables used.)
-            Best Case Complexity: TODO
-            Worst Case Complexity: TODO
-
-        Complexity requirements for full marks:
             Best Case Complexity: O(n log n)
             Worst Case Complexity: O(n log n)
             Where n is the number of treasures in the hollow
+
         """
         inputlst = [(x.value/x.weight,x) for x in self.treasures]
         self.treasures = BetterBST(inputlst)
@@ -113,15 +111,11 @@ class SpookyHollow(Hollow):
             Worst Case Complexity: O(n)
             n is the number of treasures in the hollow 
         """
-        try:
-            bestTreasure = self.treasures.get_maximal(self.treasures.root).item
-        except:
-            return
-        if bestTreasure.weight <= backpack_capacity:
-            returnedTreasure  = bestTreasure
-            del self.treasures[bestTreasure.value/bestTreasure.weight]
-            return returnedTreasure
-        return self.get_optimal_treasure(backpack_capacity)
+        for bestTreasure in self.treasures:
+            bestTreasureItem = bestTreasure.item
+            if bestTreasureItem.weight <= backpack_capacity:
+                del self.treasures[bestTreasure.key]
+                return bestTreasureItem
 
     def __str__(self) -> str:
         return Tiles.SPOOKY_HOLLOW.value
@@ -152,7 +146,8 @@ class MysticalHollow(Hollow):
             Where n is the number of treasures in the hollow
         """
         inputlst = [(x.value/x.weight,x) for x in self.treasures]
-        self.treasures = BetterBST(inputlst)
+        heap = MaxHeap(100)
+        self.treasures = heap.heapify(inputlst)
 
     def get_optimal_treasure(self, backpack_capacity: int) -> Treasure | None:
         """
@@ -181,11 +176,17 @@ class MysticalHollow(Hollow):
             Worst Case Complexity: O(n log n)
             Where n is the number of treasures in the hollow
         """
-        for bestTreasure in self.treasures:
-            bestTreasureItem = bestTreasure.item
-            if bestTreasureItem.weight <= backpack_capacity:
-                del self.treasures[bestTreasure.key]
-                return bestTreasureItem
+        if len(self.treasures) == 0:
+            return None
+        
+        while len(self.treasures) >0:
+            try:
+                check_tres = self.treasures.get_max()
+            except IndexError:
+                return None
+            if check_tres[1].weight <= backpack_capacity:
+                return check_tres[1]
+        return
 
     def __str__(self) -> str:
         return Tiles.MYSTICAL_HOLLOW.value
