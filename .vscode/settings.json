@@ -3,8 +3,8 @@
   "python.testing.pytestEnabled": false,
   "python.testing.unittestEnabled": true,
   "workbench.colorCustomizations": {
-    "activityBar.activeBackground": "#b300b3",
-    "activityBar.background": "#b300b3",
+    "activityBar.activeBackground": "#ef0404",
+    "activityBar.background": "#ff0000",
     "activityBar.foreground": "#e7e7e7",
     "activityBar.inactiveForeground": "#e7e7e799",
     "activityBarBadge.background": "#9f9f00",
