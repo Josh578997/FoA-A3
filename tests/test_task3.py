@@ -44,8 +44,7 @@ class TestTask3(TestCase):
 
         # Check final position is an exit
         fp: Position = path[len(path) - 1]  # Final position
-        self.assertTrue(fp in maze.end_positions, f"Expected the final position to be an exit got {
-                        fp} ({maze.grid[fp.row][fp.col]})")
+        self.assertTrue(fp in maze.end_positions, f"Expected the final position to be an exit got {fp} ({maze.grid[fp.row][fp.col]})")
 
         # Check initial position is a start
         self.assertEqual(path[0], maze.start_position, f"Expected the initial position to be the start position got {

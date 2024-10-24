@@ -180,12 +180,11 @@ class MysticalHollow(Hollow):
             return None
         
         while len(self.treasures) >0:
-            try:
-                check_tres = self.treasures.get_max()
-            except IndexError:
-                return None
+            check_tres = self.treasures.get_max()
             if check_tres[1].weight <= backpack_capacity:
                 return check_tres[1]
+            else:
+                self.treasures.add(check_tres)
         return
 
     def __str__(self) -> str:
