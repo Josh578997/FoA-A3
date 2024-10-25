@@ -194,7 +194,7 @@ class Maze:
             position (Position): The position to check.
 
         Returns:
-            bool - True if the position is within the maze and not blocked by a wall / hollow.
+            bool - True if the position is within the maze (is not a wall).
 
         Complexity:
             Best Case Complexity: O(1)
