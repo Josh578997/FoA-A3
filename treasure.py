@@ -8,7 +8,8 @@ class Treasure:
     def __init__(self, value: int, weight: int) -> None:
         """
         Complexity:
-            O(1)
+            Best Case: O(1)
+            Worst Case O(1)
 
         Args:
             value (int): The value of this treasure
