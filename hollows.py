@@ -164,9 +164,6 @@ class MysticalHollow(Hollow):
             Worst Case Complexity: O(nlog(n))
             n is the number of treasures (size of self.treasures heap)
         """
-
-        if len(self.treasures) == 0:
-            return 
         cache = LinkedStack()
         return self.get_optimal_treasure_aux(backpack_capacity,cache)
     
@@ -174,8 +171,8 @@ class MysticalHollow(Hollow):
         '''
         auxillary for get_optimal_treasure()
         Best Case Complexity: O(log(n))
-            Worst Case Complexity: O(nlog(n))
-            n is the number of treasures (size of self.treasures heap)
+        Worst Case Complexity: O(nlog(n))
+        n is the number of treasures (size of self.treasures heap)
         '''
 
         if len(self.treasures) ==0:
