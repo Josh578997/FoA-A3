@@ -171,7 +171,13 @@ class MysticalHollow(Hollow):
         return self.get_optimal_treasure_aux(backpack_capacity,cache)
     
     def get_optimal_treasure_aux(self, backpack_capacity: int,cache:LinkedStack) -> Treasure | None:
-        "auxillary for get_optimal_treasure()"
+        '''
+        auxillary for get_optimal_treasure()
+        Best Case Complexity: O(log(n))
+            Worst Case Complexity: O(nlog(n))
+            n is the number of treasures (size of self.treasures heap)
+        '''
+
         if len(self.treasures) ==0:
             while not cache.is_empty():
                 self.treasures.add(cache.pop())
@@ -183,6 +189,7 @@ class MysticalHollow(Hollow):
             return check_tres[1]
         cache.push(check_tres)
         return self.get_optimal_treasure_aux(backpack_capacity,cache)
+    
     def __str__(self) -> str:
         return Tiles.MYSTICAL_HOLLOW.value
 
